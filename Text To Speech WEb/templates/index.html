@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 50px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;A
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Text-to-Speech Converter</h2>
+        <form action="/convert" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" name="text" rows="5" placeholder="Enter text..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Convert to Speech</button>
+        </form>
+
+        {% if converted %}
+        <audio controls autoplay>
+            <source src="{{ url_for('static', filename='output.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger mt-3" role="alert">
+            Please enter some text to convert.
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
